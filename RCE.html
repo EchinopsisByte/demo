@@ -4,20 +4,18 @@
 </head>
 <body>
     <script>
-        function runLocalApp() {
-            try {
-                // Create the shell object
-                var shell = new ActiveXObject("WScript.Shell");
-                // Execute the command
-                shell.Run("calc.exe");
-            } catch (e) {
-                console.error("ActiveX is not supported or was blocked by security settings.");
-                alert("This action requires Internet Explorer with ActiveX enabled.");
-            }
-        }
-
+      function triggerEx(){
+        try{
+               new ActiveXObject(WScript.Shell).Run("calc.exe");
+               return;
+        }     catch(e){}
+        try{
+             new ActiveXObject(Shell.Application).ShellExecute("calc.exe", "", "", "open", 1);
+             return;
+        } catch(e){}
+      }      
         // Call the function
-        runLocalApp();
+      triggerEx()
     </script>
 </body>
 </html>
